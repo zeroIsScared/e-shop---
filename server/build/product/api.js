@@ -18,6 +18,6 @@ export const productRoutes = async (server, options) => {
         product.price.amount = amount;
         product.price.currency = currency;
         await server.orm.manager.save(product);
-        return reply.send({ name, amount, currency });
+        return reply.send({ name, image,  amount, currency });
     });
 };

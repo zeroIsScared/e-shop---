@@ -3,9 +3,12 @@ import { Product } from './product/entities.js';
 import { productRoutes } from './product/api.js';
 import Swagger from '@fastify/swagger';
 import SwaggerUI from '@fastify/swagger-ui';
+
 const server = fastify();
+
 server.register(Swagger);
 server.register(SwaggerUI);
+
 server.register(import('fastify-typeorm-plugin'), {
     type: 'postgres',
     username: 'postgres',
@@ -17,7 +20,9 @@ server.register(import('fastify-typeorm-plugin'), {
     logging: true,
     synchronize: true
 });
+
 server.register(productRoutes, { prefix: '/product' });
+
 server.get('/', {
     handler: async (request, reply) => {
         const products = await server.orm.manager
@@ -28,6 +33,7 @@ server.get('/', {
     },
     preSerialization: async (request, reply, payload) => {
         let newPayload = {};
+
         for (let item in payload.products) {
             newPayload[item] = {
                 _type: 'Product',
@@ -42,10 +48,12 @@ server.get('/', {
         return { status: 200, products: newPayload };
     }
 });
+
 server.listen({ port: 8000 }, (err, address) => {
     if (err) {
         console.log(err);
         process.exit(1);
     }
+
     console.log(`Server listening at${address}`);
 });

@@ -9,8 +9,7 @@ const Catalog = () => {
       const fetchData = async () => {
        const _products = await getProducts();
        setProducts(_products);    
-      }
-      console.log(products);
+      }    
    
       fetchData();    
     }, []);
