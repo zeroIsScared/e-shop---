@@ -15,10 +15,10 @@ const Catalog = () => {
     }, []);
 
     return (
-        <>
+        <ul>
           { products && products.map(item => <Product key={item.id} productObject={item}/>)}  
 
-        </>
+        </ul>
     )
 }
 
