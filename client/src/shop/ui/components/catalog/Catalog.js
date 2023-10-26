@@ -7,8 +7,8 @@ const Catalog = () => {
   
     useEffect (() => {   
       const fetchData = async () => {
-       const _products = await getProducts();
-       setProducts(_products);    
+       const products = await getProducts();
+       setProducts(products);    
       }    
    
       fetchData();    
