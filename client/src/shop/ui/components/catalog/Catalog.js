@@ -1,7 +1,8 @@
 import Product from '../product/ui.js';
 import {useState, useEffect} from 'react';
 import { getProducts } from "../product/api.js";
-import Money from '../Money/ui.js';
+import Money from '../money/ui.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const Catalog = () => {
     const [products, setProducts] = useState([]);
@@ -22,8 +23,8 @@ const Catalog = () => {
           { products && products.map(item =>  {
             return  (
             <li>
-              <Product key={item.id} productObject={item}/>
-              <Money key={`2${item.id}`}productObject={item = money.find(element => element.id === item.id )}/>
+              <Product key={uuidv4()} productObject={item}/>
+              <Money key={uuidv4()} productObject={item = money.find(element => element.id === item.id )}/>
             </li>
             )} )}         
 

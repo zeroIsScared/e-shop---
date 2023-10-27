@@ -1,5 +1,5 @@
 import {Product} from './model.js';
-import {Money} from '../Money/model.js';
+import {Money} from '../money/model.js';
 
 export const getProducts = async () => {
 

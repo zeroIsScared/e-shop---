@@ -3,7 +3,7 @@ const Money  = ({productObject}) => {
     const {amount, currency} = productObject;
 
 return (
-    <div>
+    <div >
         {amount} {currency}
     </div>
 )
