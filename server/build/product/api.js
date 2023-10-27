@@ -6,7 +6,7 @@ export const productRoutes = async (server, options) => {
         schema: {
             body: ProductRequest,
             response: {
-                200: ProductRequest
+                200: ProductRequest,
             }
         }
     }, async (request, reply) => {
@@ -18,6 +18,6 @@ export const productRoutes = async (server, options) => {
         product.price.amount = amount;
         product.price.currency = currency;
         await server.orm.manager.save(product);
-        return reply.send({ name, image,  amount, currency });
+        return reply.send({ name, image, amount, currency });
     });
 };

@@ -1,15 +1,15 @@
 
+
+
 const Product = ({productObject}) => {   
   
-    const {name,image, money:{amount, currency}} = productObject;
+    const {name,image} = productObject;
     
     return (
-   <li>
-    <h2>{name}</h2>
-    <p>{amount} </p>
-    <p>{currency} </p>
+   <div>
+    <h2>{name}</h2>    
     <img src={image} alt="product"></img>
-  </li>
+  </div>
     )
 }
 

@@ -1,23 +1,25 @@
 import {Product} from './model.js';
+import {Money} from '../Money/model.js';
 
 export const getProducts = async () => {
 
-    const getResponse = await fetch ('http://[::1]:8000/');    
+    const getResponse = await fetch ('http://localhost:8000/');    
     const response = await getResponse.json();
-    const  apiProducts = await response.products;   
+    const  apiProducts = await response.products;     
 
     let products = [];
+    let money = [];
 
    for (let product in await apiProducts ) {
     
-     products.push(new Product(apiProducts[product]));
+     products.push(new Product(apiProducts[product]));  
+     money.push(new Money(apiProducts[product].id,apiProducts[product].price ));
 
    }
 
-   return products;
+   return [ products, money];
 }
 
-console.log(getProducts());
 
 //     // [
 //     //     {id:0, name: 'TV LG', price: {amount: 1000, currency: 'USD'}},
