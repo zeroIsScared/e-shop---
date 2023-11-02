@@ -2,6 +2,7 @@ import { Money } from '../Financial/entities.js';
 import { Product } from "./entities.js";
 import {FastifyPluginAsyncTypebox} from '@fastify/type-provider-typebox';
 import { ProductReply, ProductReplyType, ProductRequest, ProductRequestType } from './schema.js';
+import { ILike } from "typeorm";
 
 
 export const productRoutes =async (server,options) =>{
@@ -27,5 +28,19 @@ export const productRoutes =async (server,options) =>{
     await server.orm.manager.save(product);
     
  return reply.send({name,image, amount, currency} );
- })
+ }), 
+
+ server.get('/:search',
+ async (request, reply) => {
+   const query = request.params.search;
+   const products = await  server.orm.getRepository(Product)
+   .createQueryBuilder()
+   .select()
+   .where('name ILIKE :query', {query: `%${query}%`})
+   .getMany();
+
+
+ return reply.send({products});
+}
+ )
 }

@@ -1,33 +1,33 @@
 import Product from '../product/ui.js';
 import {useState, useEffect} from 'react';
 import { getProducts } from "../product/api.js";
-import Money from '../money/ui.js';
 import { v4 as uuidv4 } from 'uuid';
+import IconButton from '../IconButton.js';
+import Money from '../product/Money.js';
+import heart from '../navBar/images/love.png';
 
 const Catalog = () => {
-    const [products, setProducts] = useState([]);
-    const [money, setMoney] = useState([]);
+
+    const [products, setProducts] = useState([]);    
   
     useEffect (() => {   
       const fetchData = async () => {
-       const productsData = await getProducts();
-       setProducts(productsData[0]);    
-       setMoney(productsData[1]);       
+      const products= await getProducts();
+      setProducts(products);              
       }    
    
       fetchData();    
     }, []);
  
     return (
-        <ul>
-          { products && products.map(item =>  {
-            return  (
-            <li>
-              <Product key={uuidv4()} productObject={item}/>
-              <Money key={uuidv4()} productObject={item = money.find(element => element.id === item.id )}/>
-            </li>
-            )} )}         
-
+        <ul className='catalog'>
+          { products && products.map(item => <Product 
+          key={uuidv4()} 
+          productObject={item}
+          >
+            <Money price ={item.price}/>
+            <IconButton image={heart} alt={'heartIcon'}/>
+            </Product>)} 
         </ul>
     )
 }

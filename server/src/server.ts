@@ -23,6 +23,7 @@ server.register(import('fastify-typeorm-plugin'),{
     logging: true,
     synchronize: true       
   });
+
   server.register(productRoutes, {prefix: '/product'});
   
   interface IPayload { 
@@ -47,10 +48,10 @@ for( let item in payload.products) {
     
     newPayload[item]= {
         _type: 'Product', 
-...payload.products[item],
-price: {
-    ...payload.products[item].price,
-     _type: "Money"
+        ...payload.products[item],
+       price: {
+       ...payload.products[item].price,
+       _type: "Money"
     }
     }
 
